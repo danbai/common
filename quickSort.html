@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a = [4, 3, 2, 6];
+
+        function quickSort(arr) {
+            if (!arr.length) {
+                return [];
+            };
+
+            var poivt = arr[0],
+                rest = arr.slice(1);
+
+            return [].concat(quickSort(rest.filter(function(x) {
+                return x <= poivt;
+            })), [poivt], quickSort(rest.filter(function(x) {
+                return x >= poivt;
+            })));
+        }
+
+        console.log(quickSort(a));
+
+        function quickSort2(arr) {
+            if (!arr.length) {
+                return [];
+            }
+
+            const [poivt, ...rest] = arr;
+
+            return [
+                ...quickSort2(rest.filter(x => x >= poivt)),
+                poivt,
+                ...quickSort2(rest.filter(x => x < poivt))
+            ];
+        }
+
+        console.log(quickSort2(a));
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+        var a = [1, 2, 3];
+
+        var b = a.map(function(item) {
+            return item + 1;    //a.map
+        });
+
+        console.log(b);
+
+        var c = a.map(item => item + 1);
+
+        console.log(c);
+
+        // 数组的解构赋值
+        var [a, b, c] = [1, 2, 3];
+        console.log(a);
+        console.log(b);
+        console.log(c);
+
+        let [foo, [[bar], baz]] = [1, [[2], 3]];
+        console.log(foo);
+        console.log(bar);
+        console.log(baz);
+
+        let [ , , third] = [1, 2, 3];
+        console.log(third);
+
+        let [x, , y] = [1, 2, 3];
+        console.log(x);
+        console.log(y);
+
+        let [head, ...tail] = [1, 2, 3, 4];
+        console.log(head);  //1
+        console.log(tail);  //[2, 3, 4]
+
+        let [x1, y1, ...z] = ['a'];
+        console.log(x1); //'a'
+        console.log(y1  ); //undefined
+        console.log(z); //[]
+
+        //默认值
+        var [xx = 1] = [undefined];
+        console.log(xx);    //1
+
+        function f() {
+            return 'aaa';
+        }
+        var [yy = f()] = [];
+        console.log(yy);
+
+        // 对象的结构赋值
+        var {bar1, foo1} = {foo1: 2, bar1: 1};
+        console.log(bar1);   //1
+        console.log(foo1);   //2
+
+        //字符串的解构赋值
+        const [aa, bb, cc, dd, ee] = 'hello';
+        console.log(aa);
+        console.log(bb);
+        console.log(cc);
+        console.log(dd);
+        console.log(ee);
+
+        let {length: len} = 'hello';
+        console.log(len);
+
+        //数值和布尔值的解构赋值
+
+        //函数参数的解构赋值
+        function add(x, y) {
+            return x + y;
+        }
+        function add2([x, y]) {
+            return x + y;
+        }
+        console.log(add2([1, 2]));
+
+        var array = [[1, 2], [3, 4]].map(([a, b]) => a + b);
+        console.log(array); //[3, 7]
+    </script>
+</body>
+</html>

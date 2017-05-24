@@ -40,6 +40,15 @@
         }
 
         console.log(quickSort2(a));
+
+        var aaa = a.sort(function(a, b) {
+            return a - b;
+        });
+        console.log(aaa);
+        var bbb = a.sort(function(a, b) {
+            return b - a;
+        });
+        console.log(bbb);
     </script>
 </body>
 </html>

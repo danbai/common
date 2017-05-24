@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+    <script>
+        var a = [6, 1, 2, 3, 3, 2, 4, 5, 4];
+
+        // 数组去重方法1
+        function uniqueArray(a) {
+            var item,
+                b = [];
+
+            for (var i = 0; i < a.length; i++) {
+                item = a[i];
+
+                if (b.indexOf(item) === -1) {
+                    b.push(item);
+                }
+            }
+
+            return b;
+        }
+
+        console.log(uniqueArray(a));    //[6, 1, 2, 3, 4, 5]
+
+        //数组去重方法2
+        function uniqueArray2(a) {
+            var item,
+                o = {},
+                res = [];
+
+            for (var i = 0; i < a.length; i++) {
+                item = a[i];
+
+                if (o[item] !== 1) {
+                    res.push(item);
+                    o[item] = 1;
+                }
+            }
+
+            return res;
+        }
+
+        console.log(uniqueArray2(a));
+
+        // 数组快速排序1
+        function quickSortArray(a) {
+            if (!a.length) {
+                return [];
+            }
+
+            var poivt = a[0],
+                rest = a.slice(1);
+
+            return [].concat(quickSortArray(rest.filter(function(item) {
+                return item < poivt;
+            })), [poivt], quickSortArray(rest.filter(function(item) {
+                return item >= poivt;
+            })));
+        }
+
+        console.log(quickSortArray(a));
+
+        //数组快速排序2
+        function quickSortArray2(a) {
+            if (!a.length) {
+                return [];
+            }
+
+            const [poivt, ...rest] = a;
+
+            return [
+                ...quickSortArray2(rest.filter(item => item < poivt)),
+                poivt,
+                ...quickSortArray2(rest.filter(item => item >= poivt))
+            ];
+        }
+
+        console.log(quickSortArray2(a));
+    </script>
+</body>
+</html>

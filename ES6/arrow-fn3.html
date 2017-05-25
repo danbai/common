@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+<body>
+    <script>
+        /* function f(v) {
+            return v;
+        }
+        console.log(f(1));
+
+        var g = v => {
+            return v;
+        }
+        console.log(g(2));
+
+        var h = () => {
+            return 5;
+        }
+        console.log(h());
+
+        var k = id => {
+            return {id: id}; 
+        }
+        console.log(k(1));
+
+        // 箭头函数可与解构赋值结合使用
+        const full = ({foo, bar}) => {
+            return foo + ' ' + bar;
+        }
+        console.log(full({foo: 1, bar: 2}));
+
+        // 箭头函数使得表达更加简洁
+        const isEve = n => n % 2 === 0;
+        const square = n => n * n;
+        console.log(isEve(1));  //false
+        console.log(isEve(2));  //true
+        console.log(square(2)); //4
+
+        //箭头函数的一个用处是简化回调函数
+        var array = [1, 2, 3].map(function(x) {
+            return x * x;
+        });
+        var array2 = [1, 2, 3].map(x => x * x);
+        console.log(array);
+        console.log(array2);
+
+        array.sort((a, b) => b - a);
+        console.log(array);
+
+        const smallPoivt = (a, poivt) => a.filter(x => x < poivt);
+        console.log(smallPoivt([1, 2, 3, 4], 3));
+
+        const numbers = (...nums) => nums;
+        console.log(numbers(1, 2, 3, 4, 5)); */
+
+        //this指向
+        function foo() {
+            console.log(this);
+            setTimeout(() => {
+                console.log(this);
+                console.log({'id:': this.id});
+            }, 100);
+        }
+
+        foo.call({id: 42});
+
+        var o = {
+            x: 1,
+            fun: function() {
+                console.log(this);  //o
+                setTimeout(function() {
+                    console.log(this);  //window
+                    console.log(this.x);
+                }.bind(this), 100); //bind之后是o
+            },
+            gun: function() {
+                setTimeout(() => {
+                    console.log(this.x);    //箭头函数体内的this对象就是定义时所在的对象,而不是使用时所在的对象
+                }, 1000)
+            }
+        };
+        console.log(o.fun());
+        console.log(o.gun());
+
+        var handler = {
+            id: '123456',
+            init: function() {
+                //this指向handler对象
+                document.addEventListener('click', event => this.doSomething(event.type), false);
+            },
+            doSomething: function(type) {
+                console.log('handling ' + type + ' for ' + this.id);
+            }
+        };
+        handler.init();
+
+        function Timer() {
+            this.seconds = 0;
+            setInterval(() => {
+                this.seconds++;
+            }, 1000);
+        }
+        var timer = new Timer();    //构造对象,继承
+        console.log(timer.seconds); //0
+        setTimeout(() => console.log(timer.seconds), 3100); //3
+
+        function foofoo() {
+            return () => {
+                return () => {
+                    return () => {
+                        console.log('id: ', this.id);
+                    }
+                }
+            }
+        }
+        foofoo.call({id: 42})()()();
+    </script>
+</body>
+</html>

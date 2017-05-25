@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let和const命令</title>
+</head>
+<body>
+    <script>
+        'use strict';
+        /* {
+            let a = 1;
+            var b = 2;
+        }
+
+        // console.log(a); //ReferenceError: a is not defined
+        console.log(b);
+
+        for (var i = 0; i < 5; i++) {
+            console.log(i);
+        }
+
+        console.log(i);
+
+        for (let k = 0; k < 5; k++) {
+            console.log(k);
+        }
+
+        // console.log(k); //ReferenceError k is not defined
+
+        var a = [];
+        for (var j = 0; j < 10; j++) {
+            a[j] = function() {
+                console.log(j);
+            }
+        }
+        a[6](); //10
+
+        var b = [];
+        for (let l = 0; l < 10; l++) {
+            b[l] = function() {
+                console.log(l);
+            }
+        }
+        b[6](); //6
+
+        for (let m = 0; m < 10; m++) {
+            setTimeout(function() {
+                console.log(m);
+            }, 1000);   //0,1...
+        }
+
+        var aa = 0;
+
+        function fun() {
+            console.log(aa);
+            aa++;
+            setTimeout(fun, 1000)
+        }
+
+        fun(); */
+
+        /* console.log(bar);
+        var bar = 1;    // undefined
+
+        // console.log(foo);   //ReferenceError
+        let foo = 2;
+
+        //暂时性死区
+        var tmp = 1;
+
+        if (true) {
+            tmp = 2;
+            // let tmp;
+        }
+
+        function bar2(x = y, y = 2) {
+            return [x, y];
+        }
+        //console.log(bar2());
+
+        function bar3(x = 2, y = x) {
+            return [x, y];
+        }
+        console.log(bar3());
+
+        //块级作用域
+        function f1() {
+            var n = 5;
+
+            if (true) {
+                let n = 10;
+                console.log(n); // 10
+            }
+
+            console.log(n); // 5
+        }
+        f1();
+
+        //立即执行匿名函数
+        for (var i = 0; i < 5; i++) {
+            (function() {
+                console.log(i);
+            }(i));
+        }
+
+        for (let k = 0; k < 5; k++) {
+            console.log(k);
+        }
+
+        let f;
+        //函数声明
+        {
+            let a = 'secret';
+            f = function() {
+                return a;
+            }
+        }
+        f(); */
+
+        const a = 1;
+        console.log(a);
+        // a = 2;
+
+        const foo = {};
+        foo.a = 2;
+        console.log(foo);
+        // foo = {};
+
+        var constantize = (obj) => {
+            Object.freeze(obj);
+
+            Object.keys(obj).forEach((key, value) => {
+                if (typeof obj[key] === 'object') {
+                    constantize(obj[key]);
+                }
+            });
+        }
+
+        var aaa = 1;
+        console.log(window.aaa);
+
+        let bbb = 2;
+        console.log(window.bbb);    //undefined
+    </script>
+</body>
+</html>

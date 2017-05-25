@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数的REST参数</title>
+</head>
+<body>
+    <script>
+        function add(...values) {
+            let sum = 0;
+
+            console.log(values);
+
+            for (var i = 0; i < values.length; i++) {
+                sum += values[i];
+            }
+
+            return sum;
+        }
+        console.log(add(2, 5, 3));
+
+        /* const sortNumbers = () => {
+            console.log(arguments);
+            Array.prototype.slice.call(arguments).sort()
+        }; */
+
+        const sortNumbers = (...rest) => Array.prototype.slice.call(rest).sort();
+        console.log(sortNumbers(1, 3, 2, 6, 4));
+
+        const fun = (a, ...values) => {
+            let sum = 0;
+
+            for (var i = 0; i < values.length; i++) {
+                sum += values[i];
+            }
+
+            return sum * a;
+        }
+        console.log(fun(2, 3, 4));
+
+        //改写push
+        function push(array, ...items) {
+            items.forEach(function(item) {
+                array.push(item);
+            })
+
+            return array;
+        }
+        console.log(push([], 1, 2, 3));
+    </script>
+</body>
+</html>
